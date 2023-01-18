@@ -31,8 +31,8 @@ const Header = () => {
     <header className={`py-5 px-[36px] md:px-[60px] text-[#ffffffb3] font-bold flex justify-between items-center fixed w-full transition-all duration-500 ${isScrolled ? 'bg-[#0f0f0ffa]' : ''} select-none`}>
       <div className='flex items-center gap-6'>
         <RxHamburgerMenu className='w-6 h-6 cursor-pointer' onClick={() => setNavIsOpen(!navIsOpen)} />
-        <div className='hidden md:block cursor-pointer hover:font-bold hover:text-white'>Películas</div>
-        <div className='hidden md:block cursor-pointer hover:font-bold hover:text-white'>Series</div>
+        <div className='hidden md:block link-menu'>Películas</div>
+        <div className='hidden md:block link-menu'>Series</div>
       </div>
 
       <aside className={`absolute inset-0 h-screen  bg-[#000000b3] transition-all duration-200  ${navIsOpen ? 'opacity-100 z-10' : 'opacity-0 -z-10'}`}>
@@ -40,14 +40,14 @@ const Header = () => {
             <nav className=' w-56 md:w-72 h-screen'>
                 <RiCloseFill className='w-[30px] h-[30px] cursor-pointer relative -left-[2px] hover:text-white' onClick={() => setNavIsOpen(!navIsOpen)}/>
                 <ul className='font-normal text-[19px] md:text-2xl'>
-                    <li className='mt-6 cursor-pointer hover:font-bold hover:text-white'>Inicio</li>
-                    <li className='mt-6 cursor-pointer hover:font-bold hover:text-white'>Series</li>
-                    <li className='mt-6 cursor-pointer hover:font-bold hover:text-white'>Peliculas</li>
-                    <li className='mt-6 cursor-pointer hover:font-bold hover:text-white'>Originales</li>
-                    <li className='mt-6 cursor-pointer hover:font-bold hover:text-white'>Recién Añadidos</li>
-                    <li className='mt-6 cursor-pointer hover:font-bold hover:text-white'>ÚIltimos Días</li>
-                    <li className='mt-6 cursor-pointer hover:font-bold hover:text-white'>Próximamente</li>
-                    <li className='mt-6 cursor-pointer hover:font-bold hover:text-white'>En Tendencia</li>
+                    <li className='mt-6 link-menu '>Inicio</li>
+                    <li className='mt-6 link-menu'>Series</li>
+                    <li className='mt-6 link-menu'>Peliculas</li>
+                    <li className='mt-6 link-menu'>Originales</li>
+                    <li className='mt-6 link-menu'>Recién Añadidos</li>
+                    <li className='mt-6 link-menu'>ÚIltimos Días</li>
+                    <li className='mt-6 link-menu'>Próximamente</li>
+                    <li className='mt-6 link-menu'>En Tendencia</li>
                 </ul>
             </nav>
           </div>
