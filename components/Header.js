@@ -26,27 +26,46 @@ const Header = () => {
   }, []);
 
   return (
-    <header
-      className={`py-5 px-[36px] md:px-[60px] text-[#ffffffb3] font-bold flex justify-between items-center fixed w-full transition-all duration-500 ${
-        isScrolled ? 'bg-[#0f0f0ffa]' : ''
-      } select-none`}
-    >
-      <div className='flex items-center gap-6'>
-        <RxHamburgerMenu
-          className='w-6 h-6 cursor-pointer'
-          onClick={() => setNavIsOpen(!navIsOpen)}
+    <>
+      <header
+        className={`py-5 px-[36px] md:px-[60px] text-[#ffffffb3] z-10 font-bold flex justify-between items-center fixed w-full transition-all duration-500 ${
+          isScrolled ? 'bg-[#0f0f0ffa]' : ''
+        } select-none`}
+      >
+        <div className='flex items-center gap-6'>
+          <RxHamburgerMenu
+            className='w-6 h-6 cursor-pointer'
+            onClick={() => setNavIsOpen(!navIsOpen)}
+          />
+          <div className='hidden md:block link-menu'>Películas</div>
+          <div className='hidden md:block link-menu'>Series</div>
+        </div>
+        <Image
+          src={Logo}
+          alt='Logo HBO Max'
+          className='h-4 w-24 md:w-[134px] md:h-[23px] cursor-pointer'
         />
-        <div className='hidden md:block link-menu'>Películas</div>
-        <div className='hidden md:block link-menu'>Series</div>
-      </div>
-
+        <div className='flex items-center gap-3'>
+          <BiSearch className='w-6 h-6 cursor-pointer' />
+          <div className='flex items-center'>
+            <div className='w-7 h-7 md:w-[38px] md:h-[38px]  rounded-full bg-profile font-semibold relative cursor-pointer '>
+              <div className=' text-white absolute w-[24px] h-[24px] md:w-[34px] md:h-[34px] rounded-full bg-[#000000cc] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center flex items-center justify-center'>
+                M
+              </div>
+            </div>
+            <div className='hidden md:block ml-2 hover:font-bold hover:text-white cursor-pointer'>
+              Martín
+            </div>
+          </div>
+        </div>
+      </header>
       <aside
-        className={`absolute inset-0 h-screen  bg-[#000000b3] transition-all duration-200  ${
-          navIsOpen ? 'opacity-100 z-10' : 'opacity-0 -z-10'
+        className={`absolute inset-0 h-screen text-white bg-[#000000b3] transition-all duration-100  ${
+          navIsOpen ? 'opacity-100 z-[12] block' : 'opacity-0 -z-20  '
         }`}
       >
         <div
-          className={`py-5 px-[36px] md:px-[60px]  h-screen w-fit bg-[#0f0f0f] transition-all duration-200  ${
+          className={`py-5 px-[36px] md:px-[60px]  h-screen w-fit bg-[#0f0f0f] transition-all duration-100  ${
             navIsOpen ? 'translate-x-[0%]' : 'translate-x-[-10%] '
           }`}
         >
@@ -56,40 +75,19 @@ const Header = () => {
               onClick={() => setNavIsOpen(!navIsOpen)}
             />
             <ul className='font-normal text-[19px] md:text-2xl'>
-              <li className='mt-6 link-menu '>Inicio</li>
-              <li className='mt-6 link-menu'>Series</li>
-              <li className='mt-6 link-menu'>Peliculas</li>
-              <li className='mt-6 link-menu'>Originales</li>
-              <li className='mt-6 link-menu'>Recién Añadidos</li>
-              <li className='mt-6 link-menu'>ÚIltimos Días</li>
-              <li className='mt-6 link-menu'>Próximamente</li>
-              <li className='mt-6 link-menu'>En Tendencia</li>
+              <li className='mt-6 link-menu select-none'>Inicio</li>
+              <li className='mt-6 link-menu select-none'>Series</li>
+              <li className='mt-6 link-menu select-none'>Peliculas</li>
+              <li className='mt-6 link-menu select-none'>Originales</li>
+              <li className='mt-6 link-menu select-none'>Recién Añadidos</li>
+              <li className='mt-6 link-menu select-none'>ÚIltimos Días</li>
+              <li className='mt-6 link-menu select-none'>Próximamente</li>
+              <li className='mt-6 link-menu select-none'>En Tendencia</li>
             </ul>
           </nav>
         </div>
       </aside>
-
-      <Image
-        src={Logo}
-        alt='Logo HBO Max'
-        className='h-4 w-24 md:w-[134px] md:h-[23px] cursor-pointer'
-      />
-
-      <div className='flex items-center gap-3'>
-        <BiSearch className='w-6 h-6 cursor-pointer' />
-
-        <div className='flex items-center'>
-          <div className='w-7 h-7 md:w-[38px] md:h-[38px]  rounded-full bg-profile font-semibold relative cursor-pointer '>
-            <div className=' text-white absolute w-[24px] h-[24px] md:w-[34px] md:h-[34px] rounded-full bg-[#000000cc] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center flex items-center justify-center'>
-              M
-            </div>
-          </div>
-          <div className='hidden md:block ml-2 hover:font-bold hover:text-white cursor-pointer'>
-            Martín
-          </div>
-        </div>
-      </div>
-    </header>
+    </>
   );
 };
 

@@ -1,10 +1,12 @@
-import Header from '@/components/Header';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import '@/styles/globals.css';
-Header;
+import Layout from '@/components/Layout';
+
 export default function App({ Component, pageProps }) {
   return (
-    <Header>
+    <Layout>
       <Component {...pageProps} />
-    </Header>
+    </Layout>
   );
 }
