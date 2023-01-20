@@ -1,8 +1,10 @@
 import Banner from '@/components/Banner';
 import Header from '@/components/Header';
+import requests from '@/utils/requests';
 import Head from 'next/head';
 import Image from 'next/image';
-export default function Home() {
+
+export default function Home({ popularMovies }) {
   return (
     <>
       <Head>
@@ -11,8 +13,21 @@ export default function Home() {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
+
       {/* Header en _app.js */}
-      <Banner/>
+      <Banner popularMovies={popularMovies.slice(0,6)} />
     </>
   );
+}
+
+export async function getServerSideProps() {
+  const res = await fetch(requests.fetchPopular);
+  const data = await res.json();
+  const popular = data.results;
+
+  return {
+    props: {
+      popularMovies: popular,
+    },
+  };
 }

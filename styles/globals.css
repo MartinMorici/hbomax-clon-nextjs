@@ -8,3 +8,7 @@
     }
 
 }
+
+.slick-active .bgcolor{
+  background-color: white;
+}

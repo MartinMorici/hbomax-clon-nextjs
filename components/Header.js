@@ -59,6 +59,8 @@ const Header = () => {
           </div>
         </div>
       </header>
+
+      
       <aside
         className={`absolute inset-0 h-screen text-white bg-[#000000b3] transition-all duration-100  ${
           navIsOpen ? 'opacity-100 z-[12] block' : 'opacity-0 -z-20  '

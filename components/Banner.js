@@ -1,11 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
+import requests from '@/utils/requests';
+import { useState } from 'react';
 import { MdNavigateNext } from 'react-icons/md';
 import { SlArrowRight } from 'react-icons/sl';
 import { SlArrowLeft } from 'react-icons/sl';
-
 import Slider from 'react-slick';
 
-const Banner = () => {
+const Banner = ({popularMovies}) => {
+  const [movies, setMovies] = useState(popularMovies)
+
+
+  console.log(popularMovies);
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -42,61 +47,80 @@ const Banner = () => {
     appendDots: (dots) => (
       <div
         style={{
+          bottom:'10px',
           borderRadius: '10px',
           padding: '10px',
-          color:'white',
         }}
       >
         <ul style={{ margin: '0px' }}> {dots} </ul>
       </div>
     ),
+     customPaging: i => (
+        <div
+        className='bgcolor w-2 h-2 mx-0 bg-[#ffffff80] rounded-full '
+        >
+        </div>
+      )
   };
 
   return (
     <div>
-      <Slider className='h-[89vh]' {...settings}>
-        <div className='w-full h-full'>
+      <Slider {...settings}>
+        {movies.map((movie) => {
+          return (<div key={movie.id} className='h-[90vh] focus-visible:outline-none relative '>
+            <img className='h-[90vh] w-full object-cover focus-visible:border-none' src={requests.imgBase + movie.backdrop_path} alt={movie.title} />
+            <div className='absolute bottom-32 text-white pl-[36px] md:pl-[60px]'>
+              <h2>{movie.title}</h2>
+              <p className='w-[800px]'>{movie.overview}</p>
+              <div>
+                <button>PLAY</button>
+                <button>Más Info</button>
+              </div>
+            </div>
+          </div>)
+        })}
+        {/* <div className='h-[90vh]'>
           <img
-            className='object-cover'
+            className=' h-[90vh] w-full object-cover'
+            src='https://via.placeholder.com/1920x1080'
+            alt=''
+          />
+        </div>
+        <div className='h-[90vh]'>
+          <img
+            className='h-[90vh] w-full object-cover'
             src='https://via.placeholder.com/400'
             alt=''
           />
         </div>
-        <div className='w-full h-full'>
+        <div className='h-[90vh]'>
           <img
-            className='object-cover'
+            className='h-[90vh] w-full object-cover'
             src='https://via.placeholder.com/400'
             alt=''
           />
         </div>
-        <div className='w-full h-full'>
+        <div className='h-[90vh]'>
           <img
-            className='object-cover'
+            className='h-[90vh] w-full object-cover'
             src='https://via.placeholder.com/400'
             alt=''
           />
         </div>
-        <div className='w-full h-full'>
+        <div className='h-[90vh]'>
           <img
-            className='object-cover'
+            className='h-[90vh] w-full object-cover'
             src='https://via.placeholder.com/400'
             alt=''
           />
         </div>
-        <div className='w-full h-full'>
+        <div className='h-[90vh]'>
           <img
-            className='object-cover'
+            className='h-[90vh] w-full object-cover'
             src='https://via.placeholder.com/400'
             alt=''
           />
-        </div>
-        <div className='w-full h-full'>
-          <img
-            className='object-cover'
-            src='https://via.placeholder.com/400'
-            alt=''
-          />
-        </div>
+        </div> */}
       </Slider>
     </div>
   );
