@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-
+/* ml-[28px] sm:ml-[36px] md:ml-[48px] lg:ml-[60px] */
 @layer components {
     .link-menu {
       @apply cursor-pointer hover:font-bold hover:text-white;
@@ -16,10 +16,15 @@
 
 .slider-container .slick-list{
   padding-left: 0px !important; 
-  margin-left: 60px;
+  margin-left: 28px;
 }
-
+@media (min-width:640px){
+  .slider-container .slick-list{ 
+    margin-left: 36px;
+  }
+}
 @media (max-width:640px){
+
 
   .parrafo{
     overflow: hidden;
@@ -29,5 +34,16 @@
              line-clamp: 3; 
      -webkit-box-orient: vertical;
   
+  }
+}
+
+@media (min-width: 768px){
+  .slider-container .slick-list{ 
+    margin-left: 48px;
+  }
+}
+@media (min-width: 1024px){
+  .slider-container .slick-list{ 
+    margin-left: 60px;
   }
 }
