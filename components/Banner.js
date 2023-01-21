@@ -1,9 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
 import requests from '@/utils/requests';
 import { useState } from 'react';
-import { MdNavigateNext } from 'react-icons/md';
 import { SlArrowRight } from 'react-icons/sl';
 import { SlArrowLeft } from 'react-icons/sl';
+import { BsPlayFill } from "react-icons/bs";
+import { BiPlay } from "react-icons/bi";
+
 import Slider from 'react-slick';
 
 const Banner = ({popularMovies}) => {
@@ -39,7 +41,7 @@ const Banner = ({popularMovies}) => {
   const settings = {
     dots: true,
     infinite: true,
-    speed: 900,
+    speed: 800,
     slidesToShow: 1,
     slidesToScroll: 1,
     nextArrow: <SampleNextArrow />,
@@ -67,60 +69,19 @@ const Banner = ({popularMovies}) => {
     <div>
       <Slider {...settings}>
         {movies.map((movie) => {
-          return (<div key={movie.id} className='h-[90vh] focus-visible:outline-none relative '>
+          return (<div key={movie.id} className='h-[90vh] focus-visible:outline-none relative bg-bannerImg '>
+            <div className='absolute h-[90vh] inset-0 bg-bannerImg'></div>
             <img className='h-[90vh] w-full object-cover focus-visible:border-none' src={requests.imgBase + movie.backdrop_path} alt={movie.title} />
-            <div className='absolute bottom-32 text-white pl-[36px] md:pl-[60px]'>
-              <h2>{movie.title}</h2>
-              <p className='w-[800px]'>{movie.overview}</p>
-              <div>
-                <button>PLAY</button>
-                <button>Más Info</button>
+            <div className='absolute bottom-32 text-white px-3 sm:pl-[36px] md:pl-[60px] w-full'>
+              <h2 className='text-center sm:text-left font-bold text-xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl sm:w-[30ch] mb-3'>{movie.title}</h2>
+              <p className='text-center sm:text-left max-w-[800px] sm:pr-4 sm:mb-6 text-ellipsis overflow-hidden md:text-lg whitespace-nowrap '>{movie.overview}</p>
+              <div className=' gap-5 items-center hidden sm:flex'>
+                <button className='border-2 border-white rounded-full flex justify-center items-center p-2 hover:border-[#663399] hover:bg-black'> <BiPlay className='w-9 h-9'/> </button>
+                <button className='px-[20px] bg-[#3e3b44b3] min-h-[4px] min-w-[144px] py-[12px] rounded-[4px] hover:border-[#663399] hover:border-2 hover:bg-black font-semibold'>MÁS INFO</button>
               </div>
             </div>
           </div>)
         })}
-        {/* <div className='h-[90vh]'>
-          <img
-            className=' h-[90vh] w-full object-cover'
-            src='https://via.placeholder.com/1920x1080'
-            alt=''
-          />
-        </div>
-        <div className='h-[90vh]'>
-          <img
-            className='h-[90vh] w-full object-cover'
-            src='https://via.placeholder.com/400'
-            alt=''
-          />
-        </div>
-        <div className='h-[90vh]'>
-          <img
-            className='h-[90vh] w-full object-cover'
-            src='https://via.placeholder.com/400'
-            alt=''
-          />
-        </div>
-        <div className='h-[90vh]'>
-          <img
-            className='h-[90vh] w-full object-cover'
-            src='https://via.placeholder.com/400'
-            alt=''
-          />
-        </div>
-        <div className='h-[90vh]'>
-          <img
-            className='h-[90vh] w-full object-cover'
-            src='https://via.placeholder.com/400'
-            alt=''
-          />
-        </div>
-        <div className='h-[90vh]'>
-          <img
-            className='h-[90vh] w-full object-cover'
-            src='https://via.placeholder.com/400'
-            alt=''
-          />
-        </div> */}
       </Slider>
     </div>
   );
