@@ -1,10 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import requests from '@/utils/requests';
-import React from 'react';
 import Slider from 'react-slick';
-import Image from 'next/image';
+import requests from '@/utils/requests';
+import genres from '@/utils/genres';
 import { SlArrowRight } from 'react-icons/sl';
 import { SlArrowLeft } from 'react-icons/sl';
+import { BiPlay } from 'react-icons/bi';
+import { HiPlus } from 'react-icons/hi';
 const Row = (props) => {
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -57,35 +58,62 @@ const Row = (props) => {
       {
         breakpoint: 1200,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: props.slides - 3,
         },
       },
       {
         breakpoint: 1700,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: props.slides - 2,
         },
       },
     ],
   };
   return (
-    <div className={`${props.gradient ? 'bg-rowGradient' : ''}  mt-[-6px] group`}>
-      <h2 className='ml-[28px] sm:ml-[36px] md:ml-[48px] lg:ml-[60px] font-bold text-white text-xl mb-3 flex items-center'>{props.titulo}</h2>
-      <div className="slider-container">
-          <Slider {...settings}>
-            {props.movies.map((movie) => {
-              return (
-                <div key={movie.id} className={`pr-2 focus-visible:outline-none`}>
+    <div
+      className={`${
+        props.gradient ? 'bg-rowGradient' : ''
+      }  mt-[-6px] mb-[30px] group`}
+    >
+      <h2 className='ml-[28px] sm:ml-[36px] md:ml-[48px] lg:ml-[60px] font-bold text-white text-xl mb-3 flex items-center'>
+        {props.titulo}
+      </h2>
+      <div className='slider-container'>
+        <Slider {...settings}>
+          {(props.genero ? genres : props.movies).map((movie) => {
+            return (
+              <>
+                <div
+                  key={movie.id}
+                  className={`mr-2 relative focus-visible:outline-none outline-[rgb(0,0,0,0)] outline outline-2 outline-offset-[-2px] transition-all duration-300 hover:outline-[#663399]`}
+                >
                   <img
-  
                     className=''
-                    src={requests.imgBase + movie.backdrop_path}
-                    alt={movie.title}
+                    src={
+                      props.genero
+                        ? movie.img.src
+                        : requests.imgBase + movie.backdrop_path
+                    }
+                    alt={props.genero ? movie.alt : movie.title}
                   />
+                  <div className='absolute inset-0 group/btn bg-[rgb(0,0,0,0.2)] hover:bg-[rgb(0,0,0,0.0)] transition-all duration-300'>
+                    {props.genero ? null : (
+                      <div className='opacity-0 absolute group-hover/btn:opacity-100 bottom-0 right-0 pr-4 pb-3 flex items-center transition-all duration-300'>
+                        <button className='rounded-full flex justify-center items-center p-[2px] bg-slate-300 hover:bg-white hover:scale-110'>
+                          <BiPlay className='relative left-[2px] w-8 h-8' />
+                        </button>
+
+                        <button className='ml-2 rounded-full flex justify-center items-center p-2 bg-slate-300 hover:bg-white hover:scale-110'>
+                          <HiPlus className=' w-5 h-5' />
+                        </button>
+                      </div>
+                    )}
+                  </div>
                 </div>
-              );
-            })}
-          </Slider>
+              </>
+            );
+          })}
+        </Slider>
       </div>
     </div>
   );

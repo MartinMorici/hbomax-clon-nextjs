@@ -15,10 +15,11 @@ export default function Home({ popularMovies,forYou }) {
 
       {/* Header en _app.js */}
       <Banner popularMovies={popularMovies.slice(0,6)} />
-       <Row titulo ={'Solo para ti'} movies={forYou} gradient={true} slides={6}/> 
+      <Row titulo ={'Solo para ti'} movies={forYou} gradient={true} slides={6}/> 
       {/* Mi lista */}
-      {/* Explora por género */}
-      {/* En tendencia */}
+      <Row titulo ={'Explora por género'} gradient={false} genero={true} slides={8}/> 
+      {/* Nuevas y Populares */}
+      {/* Shows en tendencia */}
     </>
   );
 }
