@@ -1,9 +1,8 @@
 import Banner from '@/components/Banner';
-import Header from '@/components/Header';
+import Row from '@/components/Row';
 import requests from '@/utils/requests';
 import Head from 'next/head';
 import Image from 'next/image';
-
 export default function Home({ popularMovies }) {
   return (
     <>
@@ -16,6 +15,11 @@ export default function Home({ popularMovies }) {
 
       {/* Header en _app.js */}
       <Banner popularMovies={popularMovies.slice(0,6)} />
+      <Row popularMovies={popularMovies.slice(0,7)}  titulo ={'Solo para ti'} slides={6}/>
+      {/* Solo para tí */}
+      {/* Mi lista */}
+      {/* Explora por género */}
+      {/* En tendencia */}
     </>
   );
 }

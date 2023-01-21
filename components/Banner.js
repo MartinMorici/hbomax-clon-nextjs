@@ -21,7 +21,7 @@ const Banner = ({popularMovies}) => {
         style={{ ...style, display: 'block' }}
         onClick={onClick}
       >
-        <SlArrowRight className='w-6 h-6 text-white' />
+        <SlArrowRight className='hidden group-hover:block w-6 h-6 text-white' />
       </div>
     );
   }
@@ -34,7 +34,7 @@ const Banner = ({popularMovies}) => {
         style={{ ...style, display: 'block' }}
         onClick={onClick}
       >
-        <SlArrowLeft className='w-6 h-6 text-white' />
+        <SlArrowLeft className='hidden group-hover:block w-6 h-6 text-white' />
       </div>
     );
   }
@@ -54,7 +54,7 @@ const Banner = ({popularMovies}) => {
           padding: '10px',
         }}
       >
-        <ul style={{ margin: '0px' }}> {dots} </ul>
+        <ul className='[&>li]:mx-[2px]' style={{ margin: '0px' }}> {dots} </ul>
       </div>
     ),
      customPaging: i => (
@@ -66,7 +66,7 @@ const Banner = ({popularMovies}) => {
   };
 
   return (
-    <div>
+    <div className='group'>
       <Slider {...settings}>
         {movies.map((movie) => {
           return (<div key={movie.id} className='h-[90vh] focus-visible:outline-none relative bg-bannerImg '>
@@ -74,7 +74,7 @@ const Banner = ({popularMovies}) => {
             <img className='h-[90vh] w-full object-cover focus-visible:border-none' src={requests.imgBase + movie.backdrop_path} alt={movie.title} />
             <div className='absolute bottom-32 text-white px-3 sm:pl-[36px] md:pl-[60px] w-full'>
               <h2 className='text-center sm:text-left font-bold text-xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl sm:w-[30ch] mb-3'>{movie.title}</h2>
-              <p className='text-center sm:text-left max-w-[800px] sm:pr-4 sm:mb-6 text-ellipsis overflow-hidden md:text-lg whitespace-nowrap '>{movie.overview}</p>
+              <p className=' parrafo text-center sm:text-left max-w-[800px] sm:pr-4 sm:mb-6 text-ellipsis overflow-hidden md:text-lg sm:whitespace-nowrap '>{movie.overview}</p>
               <div className=' gap-5 items-center hidden sm:flex'>
                 <button className='border-2 border-white rounded-full flex justify-center items-center p-2 hover:border-[#663399] hover:bg-black'> <BiPlay className='w-9 h-9'/> </button>
                 <button className='px-[20px] bg-[#3e3b44b3] min-h-[4px] min-w-[144px] py-[12px] rounded-[4px] hover:border-[#663399] hover:border-2 hover:bg-black font-semibold'>MÁS INFO</button>

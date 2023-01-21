@@ -27,24 +27,15 @@ const Header = () => {
 
   return (
     <>
-      <header
-        className={`py-5 px-[36px] md:px-[60px] text-[#ffffffb3] z-10 font-bold flex justify-between items-center fixed w-full transition-all duration-500 ${
-          isScrolled ? 'bg-[#0f0f0ffa]' : ''
-        } select-none`}
-      >
+      <header className={`py-5 px-[36px] md:px-[60px]  text-[#ffffffb3] z-10 font-bold flex justify-between items-center fixed w-full transition-all duration-500 ${isScrolled ? 'bg-[#0f0f0ffa]' : 'bg-headerGradient'} select-none`}>
         <div className='flex items-center gap-6'>
-          <RxHamburgerMenu
-            className='w-6 h-6 cursor-pointer'
-            onClick={() => setNavIsOpen(!navIsOpen)}
-          />
+          <RxHamburgerMenu className='w-6 h-6 cursor-pointer' onClick={() => setNavIsOpen(!navIsOpen)}/>
           <div className='hidden md:block link-menu'>Películas</div>
           <div className='hidden md:block link-menu'>Series</div>
         </div>
-        <Image
-          src={Logo}
-          alt='Logo HBO Max'
-          className='h-4 w-24 md:w-[134px] md:h-[23px] cursor-pointer'
-        />
+
+        <Image src={Logo} alt='Logo HBO Max' className='h-4 w-24 md:w-[134px] md:h-[23px] cursor-pointer'/>
+
         <div className='flex items-center gap-3'>
           <BiSearch className='w-6 h-6 cursor-pointer' />
           <div className='flex items-center'>
@@ -60,22 +51,10 @@ const Header = () => {
         </div>
       </header>
 
-      
-      <aside
-        className={`absolute inset-0 h-screen text-white bg-[#000000b3] transition-all duration-100  ${
-          navIsOpen ? 'opacity-100 z-[12] block' : 'opacity-0 -z-20  '
-        }`}
-      >
-        <div
-          className={`py-5 px-[36px] md:px-[60px]  h-screen w-fit bg-[#0f0f0f] transition-all duration-100  ${
-            navIsOpen ? 'translate-x-[0%]' : 'translate-x-[-10%] '
-          }`}
-        >
+      <aside className={`absolute inset-0 h-screen text-white bg-[#000000b3] transition-all duration-100  ${navIsOpen ? 'opacity-100 z-[12] block' : 'opacity-0 -z-20  '}`}>
+        <div className={`py-5 px-[36px] md:px-[60px]  h-screen w-fit bg-[#0f0f0f] transition-all duration-100  ${navIsOpen ? 'translate-x-[0%]' : 'translate-x-[-10%] '}`}>
           <nav className=' w-56 md:w-72 h-screen'>
-            <RiCloseFill
-              className='w-[30px] h-[30px] cursor-pointer relative -left-[2px] hover:text-white'
-              onClick={() => setNavIsOpen(!navIsOpen)}
-            />
+            <RiCloseFill className='w-[30px] h-[30px] cursor-pointer relative -left-[2px] hover:text-white' onClick={() => setNavIsOpen(!navIsOpen)}/>
             <ul className='font-normal text-[19px] md:text-2xl'>
               <li className='mt-6 link-menu select-none'>Inicio</li>
               <li className='mt-6 link-menu select-none'>Series</li>

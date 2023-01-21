@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+
 @layer components {
     .link-menu {
       @apply cursor-pointer hover:font-bold hover:text-white;
@@ -11,4 +12,22 @@
 
 .slick-active .bgcolor{
   background-color: white;
+}
+
+.slider-container .slick-list{
+  padding-left: 0px !important; 
+  margin-left: 60px;
+}
+
+@media (max-width:640px){
+
+  .parrafo{
+    overflow: hidden;
+     text-overflow: ellipsis;
+     display: -webkit-box;
+     -webkit-line-clamp: 3; /* number of lines to show */
+             line-clamp: 3; 
+     -webkit-box-orient: vertical;
+  
+  }
 }
