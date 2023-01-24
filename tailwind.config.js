@@ -5,6 +5,10 @@ module.exports = {
     './components/**/*.{js,ts,jsx,tsx}',
   ],
   theme: {
+    screens: {
+      custom: '950px',
+      
+    },
     extend: {
       backgroundImage: {
         profile:

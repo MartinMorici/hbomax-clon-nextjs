@@ -3,7 +3,10 @@ import Row from '@/components/Row';
 import requests from '@/utils/requests';
 import Head from 'next/head';
 import Image from 'next/image';
-export default function Home({ popularMovies,forYou }) {
+
+
+export default function Home({ popularMovies,forYou,bestMovies }) {
+  
   return (
     <>
       <Head>
@@ -15,10 +18,12 @@ export default function Home({ popularMovies,forYou }) {
 
       {/* Header en _app.js */}
       <Banner popularMovies={popularMovies.slice(0,6)} />
-      <Row titulo ={'Solo para ti'} movies={forYou} gradient={true} slides={6}/> 
+    
+      <Row titulo ={'Solo para ti'} movies={forYou} gradient={true} slides={5}/> 
       {/* Mi lista */}
       <Row titulo ={'Explora por género'} gradient={false} genero={true} slides={8}/> 
-      {/* Nuevas y Populares */}
+      <Row titulo ={'Mejor valoradas'} best={true} movies={bestMovies} slides={5}/> 
+      <Row tendencia={true} movies={bestMovies} slides={4}/> 
       {/* Shows en tendencia */}
     </>
   );
@@ -33,10 +38,15 @@ export async function getServerSideProps() {
   const data2 = await res2.json();
   const forYouMovies = data2.results;
 
+  const res3 = await fetch(requests.fetchBest);
+  const data3 = await res3.json();
+  const rated = data3.results;
+
   return {
     props: {
       popularMovies: popular,
-      forYou: forYouMovies
+      forYou: forYouMovies,
+      bestMovies: rated
     },
   };
 }
