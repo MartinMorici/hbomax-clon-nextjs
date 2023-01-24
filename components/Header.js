@@ -59,11 +59,11 @@ const Header = () => {
               <li className='mt-6 link-menu select-none'>Inicio</li>
               <li className='mt-6 link-menu select-none'>Series</li>
               <li className='mt-6 link-menu select-none'>Peliculas</li>
-              <li className='mt-6 link-menu select-none'>Originales</li>
-              <li className='mt-6 link-menu select-none'>Recién Añadidos</li>
-              <li className='mt-6 link-menu select-none'>ÚIltimos Días</li>
-              <li className='mt-6 link-menu select-none'>Próximamente</li>
-              <li className='mt-6 link-menu select-none'>En Tendencia</li>
+              <li className='mt-6 link-menu select-none text-gray-500 line-through'>Originales</li>
+              <li className='mt-6 link-menu select-none text-gray-500 line-through'>Recién Añadidos</li>
+              <li className='mt-6 link-menu select-none text-gray-500 line-through'>Últimos Días</li>
+              <li className='mt-6 link-menu select-none text-gray-500 line-through'>Próximamente</li>
+              <li className='mt-6 link-menu select-none text-gray-500 line-through'>En Tendencia</li>
             </ul>
           </nav>
         </div>

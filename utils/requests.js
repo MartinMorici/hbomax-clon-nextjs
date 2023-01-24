@@ -7,6 +7,7 @@ const requests = {
     fetchForYou: `${BASE_URL}/movie/now_playing?api_key=${API_KEY}&language=en-US&page=1`,
     fetchGenre: `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=`,
     fetchBest: `${BASE_URL}/movie/top_rated?api_key=${API_KEY}&language=en-US&page=1`,
+    fetchTVPopular: `${BASE_URL}/tv/popular?api_key=${API_KEY}&language=en-US&page=1`,
     imgBase: 'https://image.tmdb.org/t/p/original/'
 }
 

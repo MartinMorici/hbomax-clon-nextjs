@@ -5,7 +5,7 @@ import Head from 'next/head';
 import Image from 'next/image';
 
 
-export default function Home({ popularMovies,forYou,bestMovies }) {
+export default function Home({ popularMovies, forYou, bestMovies, popularTV }) {
   
   return (
     <>
@@ -15,16 +15,14 @@ export default function Home({ popularMovies,forYou,bestMovies }) {
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
       </Head>
-
-      {/* Header en _app.js */}
+      
       <Banner popularMovies={popularMovies.slice(0,6)} />
     
       <Row titulo ={'Solo para ti'} movies={forYou} gradient={true} slides={5}/> 
       {/* Mi lista */}
-      <Row titulo ={'Explora por género'} gradient={false} genero={true} slides={8}/> 
       <Row titulo ={'Mejor valoradas'} best={true} movies={bestMovies} slides={5}/> 
-      <Row tendencia={true} movies={bestMovies} slides={4}/> 
-      {/* Shows en tendencia */}
+      <Row titulo ={'Explora por género'} gradient={false} genero={true} slides={8}/> 
+      <Row tendencia={true} movies={popularTV.slice(0,10)} slides={4}/> 
     </>
   );
 }
@@ -42,11 +40,16 @@ export async function getServerSideProps() {
   const data3 = await res3.json();
   const rated = data3.results;
 
+  const res4 = await fetch(requests.fetchTVPopular);
+  const data4 = await res4.json();
+  const tv = data4.results;
+
   return {
     props: {
       popularMovies: popular,
       forYou: forYouMovies,
-      bestMovies: rated
+      bestMovies: rated,
+      popularTV: tv,
     },
   };
 }
