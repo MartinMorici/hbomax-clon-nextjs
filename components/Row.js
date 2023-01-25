@@ -7,6 +7,7 @@ import { SlArrowLeft } from 'react-icons/sl';
 import { BiPlay } from 'react-icons/bi';
 import { HiPlus } from 'react-icons/hi';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const Row = (props) => {
   function SampleNextArrow(props) {
@@ -15,7 +16,8 @@ const Row = (props) => {
       <div
         className={`${className} before:content-none right-[22px] z-1`}
         style={{ ...style, display: 'block' }}
-        onClick={onClick}>
+        onClick={onClick}
+      >
         <SlArrowRight className='hidden sm:group-hover:block w-5 h-5 text-white' />
       </div>
     );
@@ -27,7 +29,8 @@ const Row = (props) => {
       <div
         className={`${className} before:content-none left-[22px] z-[11]`}
         style={{ ...style, display: 'block' }}
-        onClick={onClick}>
+        onClick={onClick}
+      >
         <SlArrowLeft className='hidden sm:group-hover:block  w-5 h-5 text-white' />
       </div>
     );
@@ -81,7 +84,8 @@ const Row = (props) => {
     <div
       className={`${
         props.gradient ? 'bg-rowGradient' : ''
-      } mt-[-6px] mb-[50px] group`}>
+      } mt-[-6px] mb-[50px] group`}
+    >
       <h2 className='ml-[28px] sm:ml-[36px] md:ml-[48px] lg:ml-[60px] font-bold text-white text-xl mb-3 flex items-center'>
         {props.titulo}
       </h2>
@@ -90,7 +94,8 @@ const Row = (props) => {
           props.tendencia
             ? 'custom:bg-[url(../public/bgtendencia.png)] custom:bg-[-55px] bg-contain custom:flex items-center pl-[28px] sm:pl-[36px] md:pl-[48px] lg:pl-[60px]'
             : ''
-        }`}>
+        }`}
+      >
         {props.tendencia ? (
           <div className='pr-4 text-center custom:text-left tracking-[-0,05em] custom:tracking-normal'>
             <h3 className='text-gray-200 font-bold text-xs  custom::text-sm'>
@@ -116,45 +121,64 @@ const Row = (props) => {
             : props.movies
           ).map((movie, index) => {
             return (
-              <div
-                className={`pr-5 w-full ${props.tendencia ? 'custom' : ''}`}
-                key={movie.id}>
+              <Link
+                href={{
+                  pathname: `/peliculas/${movie.id}`,
+                  query: {
+                    show: props.tvshow,
+                    genero: props.genero,
+                    titulo: movie.alt
+                  },
+                }}
+                key={movie.id}
+              >
                 <div
-                  className={`relative focus-visible:outline-none outline-[rgb(0,0,0,0)] outline outline-2 outline-offset-[-2px] transition-all duration-300 hover:outline-[#663399]`}>
-                  <Image
-                    width={props.genero ? 250 : 360}
-                    height={200}
-                    src={
-                      props.genero
-                        ? movie.img.src
-                        : props.best || props.tendencia
-                        ? requests.imgBase + movie.poster_path
-                        : requests.imgBase + movie.backdrop_path
-                    }
-                    alt={props.genero ? movie.alt : movie.title || movie.name}
-                  />
-                  {props.tendencia ? (
-                    <div className='absolute z-10 top-0 left-0 w-10 h-6 bg-white rounded-sm text-center flex justify-center items-center'>
-                      <span className='text-[12px] font-extrabold pt-[2px]'>
-                        #
-                      </span>
-                      <span className='text-[14px] font-bold'>{index + 1}</span>
-                    </div>
-                  ) : null}
-                  <div className='absolute inset-0 group/btn bg-[rgb(0,0,0,0.2)] hover:bg-[rgb(0,0,0,0.0)] transition-all duration-300'>
-                    {props.genero ? null : (
-                      <div className='opacity-0 absolute group-hover/btn:opacity-100 bottom-0 right-0 pr-4 pb-3 flex items-center transition-all duration-300'>
-                        <button className='rounded-full flex justify-center items-center p-[2px] bg-slate-300 hover:bg-white hover:scale-110'>
-                          <BiPlay className='relative left-[2px] w-8 h-8' />
-                        </button>
-                        <button className='ml-2 rounded-full flex justify-center items-center p-2 bg-slate-300 hover:bg-white hover:scale-110'>
-                          <HiPlus className=' w-5 h-5' />
-                        </button>
+                  className={`pr-5 w-full ${props.tendencia ? 'custom' : ''}`}
+                >
+                  <div
+                    className={`relative focus-visible:outline-none outline-[rgb(0,0,0,0)] outline outline-2 outline-offset-[-2px] transition-all duration-300 hover:outline-[#663399]`}
+                  >
+                    <Image
+                      width={props.genero ? 250 : 360}
+                      height={200}
+                      src={
+                        props.genero
+                          ? movie.img.src
+                          : props.best || props.tendencia
+                          ? requests.imgBase + movie.poster_path
+                          : requests.imgBase + movie.backdrop_path
+                      }
+                      alt={
+                        props.genero
+                          ? movie.alt
+                          : movie.title || movie.name || movie.original_name
+                      }
+                    />
+                    {props.tendencia ? (
+                      <div className='absolute z-10 top-0 left-0 w-10 h-6 bg-white rounded-sm text-center flex justify-center items-center'>
+                        <span className='text-[12px] font-extrabold pt-[2px]'>
+                          #
+                        </span>
+                        <span className='text-[14px] font-bold'>
+                          {index + 1}
+                        </span>
                       </div>
-                    )}
+                    ) : null}
+                    <div className='absolute inset-0 group/btn bg-[rgb(0,0,0,0.2)] hover:bg-[rgb(0,0,0,0.0)] transition-all duration-300'>
+                      {props.genero ? null : (
+                        <div className='opacity-0 absolute group-hover/btn:opacity-100 bottom-0 right-0 pr-4 pb-3 flex items-center transition-all duration-300'>
+                          <button className='rounded-full flex justify-center items-center p-[2px] bg-slate-300 hover:bg-white hover:scale-110'>
+                            <BiPlay className='relative left-[2px] w-8 h-8' />
+                          </button>
+                          <button className='ml-2 rounded-full flex justify-center items-center p-2 bg-slate-300 hover:bg-white hover:scale-110'>
+                            <HiPlus className=' w-5 h-5' />
+                          </button>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Link>
             );
           })}
         </Slider>

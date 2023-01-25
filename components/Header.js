@@ -4,6 +4,7 @@ import { BiSearch } from 'react-icons/bi';
 import { RiCloseFill } from 'react-icons/ri';
 import Logo from '../public/logo.png';
 import { useEffect, useState } from 'react';
+import Link from 'next/link';
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -30,11 +31,17 @@ const Header = () => {
       <header className={`py-5 px-[28px] sm:px-[36px] md:px-[48px] lg:px-[60px]  text-[#ffffffb3] z-10 font-bold flex justify-between items-center fixed w-full transition-all duration-500 ${isScrolled ? 'bg-[#0f0f0ffa]' : 'bg-headerGradient'} select-none`}>
         <div className='flex items-center gap-6'>
           <RxHamburgerMenu className='w-6 h-6 cursor-pointer' onClick={() => setNavIsOpen(!navIsOpen)}/>
-          <div className='hidden md:block link-menu'>Películas</div>
-          <div className='hidden md:block link-menu'>Series</div>
+          <Link href='/peliculas'>
+            <div className='hidden md:block link-menu'>Películas</div>
+          </Link>
+          <Link href='/series'>
+            <div className='hidden md:block link-menu'>Series</div>
+          </Link>
         </div>
 
-        <Image src={Logo} alt='Logo HBO Max' className='h-4 w-24 md:w-[134px] md:h-[23px] cursor-pointer'/>
+        <Link href='/'>
+          <Image src={Logo} alt='Logo HBO Max' className='h-4 w-24 md:w-[134px] md:h-[23px] cursor-pointer'/>
+        </Link>
 
         <div className='flex items-center gap-3'>
           <BiSearch className='w-6 h-6 cursor-pointer' />
@@ -56,9 +63,15 @@ const Header = () => {
           <nav className=' w-56 md:w-72 h-screen'>
             <RiCloseFill className='w-[30px] h-[30px] cursor-pointer relative -left-[2px] hover:text-white' onClick={() => setNavIsOpen(!navIsOpen)}/>
             <ul className='font-normal text-[19px] md:text-2xl'>
-              <li className='mt-6 link-menu select-none'>Inicio</li>
-              <li className='mt-6 link-menu select-none'>Series</li>
-              <li className='mt-6 link-menu select-none'>Peliculas</li>
+              <Link href='/'>
+                <li className='mt-6 link-menu select-none' onClick={() => setNavIsOpen(false)}>Inicio</li>
+              </Link>
+              <Link href='/series'>
+                <li className='mt-6 link-menu select-none' onClick={() => setNavIsOpen(false)}>Series</li>
+              </Link>
+              <Link href='/peliculas'>
+                <li className='mt-6 link-menu select-none' onClick={() => setNavIsOpen(false)}>Peliculas</li>
+              </Link>
               <li className='mt-6 link-menu select-none text-gray-500 line-through'>Originales</li>
               <li className='mt-6 link-menu select-none text-gray-500 line-through'>Recién Añadidos</li>
               <li className='mt-6 link-menu select-none text-gray-500 line-through'>Últimos Días</li>
