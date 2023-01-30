@@ -10,7 +10,7 @@
       @apply cursor-pointer hover:font-bold hover:text-white;
     }
     .boton{
-      @apply px-[20px] bg-[#3e3b44b3] min-h-[4px] min-w-[144px] py-[12px] rounded-[4px] hover:border-[#663399] hover:border-2 hover:bg-black font-semibold
+      @apply px-[20px] bg-[#3e3b44b3] min-h-[4px] min-w-[144px] py-[12px] rounded-[4px] border-2 border-transparent hover:border-[#663399] hover:border-2 hover:bg-black font-semibold
     }
 
 }

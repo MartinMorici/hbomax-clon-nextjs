@@ -2,7 +2,6 @@ import Banner from '@/components/Banner';
 import Row from '@/components/Row';
 import requests from '@/utils/requests';
 import Head from 'next/head';
-import Image from 'next/image';
 
 
 export default function Home({ popularMovies, forYou, bestMovies, popularTV }) {
@@ -10,7 +9,7 @@ export default function Home({ popularMovies, forYou, bestMovies, popularTV }) {
   return (
     <>
       <Head>
-        <title>HBOMax</title>
+        <title>HBO Max</title>
         <meta name='description' content='Desarrollado por Martín Morici' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
@@ -20,7 +19,7 @@ export default function Home({ popularMovies, forYou, bestMovies, popularTV }) {
     
       <Row titulo={'Solo para ti'} movies={forYou} gradient={true} slides={5}/> 
       {/* Mi lista */}
-      <Row titulo={'Mejor valoradas'} best={true} movies={bestMovies} slides={5}/> 
+      <Row titulo={'Mejor valoradas'} movies={bestMovies} best={true}  slides={5}/> 
       <Row titulo={'Explora por género'} gradient={false} genero={true} slides={8}/> 
       <Row tendencia={true} tvshow={true} movies={popularTV.slice(0,10)} slides={4}/> 
     </>
