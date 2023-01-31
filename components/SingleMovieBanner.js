@@ -23,7 +23,7 @@ const SingleMovieBanner = ({ movie, individual, trailer }) => {
         <h2 className='text-center sm:text-left font-bold text-xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl sm:w-[30ch] mb-3'>
           {movie.title || movie.original_name}
         </h2>
-        <div className='flex gap-4 text-gray-400 mb-1'>
+        <div className='flex justify-center sm:justify-start gap-4 text-gray-400 mb-1'>
           <p>{movie.runtime} MIN</p>
           <p>{movie.release_date?.slice(0, 4)}</p>
         </div>

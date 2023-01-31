@@ -108,9 +108,11 @@ const Row = (props) => {
               Las series más vistas en tu país en los últimos días, ¡no te lo
               pierdas!
             </p>
-            <button className='px-[20px] bg-[#3e3b44b3] min-h-[4px] min-w-[144px] py-[10px] rounded-[4px] border-2 border-transparent hover:border-[#663399] hover:border-2 hover:bg-black font-semibold text-white mt-6'>
-              EXPLORA MÁS
-            </button>
+            <Link href='/series'>
+              <button className='px-[20px] bg-[#3e3b44b3] min-h-[4px] min-w-[144px] py-[10px] rounded-[4px] border-2 border-transparent hover:border-[#663399] hover:border-2 hover:bg-black font-semibold text-white mt-6'>
+                EXPLORA MÁS
+              </button>
+            </Link>
           </div>
         ) : null}
         <Slider {...settings}>
@@ -120,6 +122,9 @@ const Row = (props) => {
             ? props.similar
             : props.movies
           ).map((movie, index) => {
+            if (movie.poster_path === null || movie.backdrop_path === null) {
+              return null
+            }
             return (
               <Link
                 href={{
@@ -127,7 +132,7 @@ const Row = (props) => {
                   query: {
                     show: props.tvshow,
                     genero: props.genero,
-                    titulo: movie.alt
+                    titulo: movie.alt,
                   },
                 }}
                 key={movie.id}

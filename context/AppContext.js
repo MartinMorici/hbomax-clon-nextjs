@@ -13,7 +13,6 @@ const AppProvider = ({children}) => {
     useEffect(() => {
       onAuthStateChanged(auth,(user) => {
         if (user) {
-            console.log(user);
             setCurrentUser(user)
         } else{
             setCurrentUser(null)
