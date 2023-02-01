@@ -5,7 +5,7 @@ import React from 'react';
 import { BiPlay } from 'react-icons/bi';
 import { MdOutlineLocalMovies } from 'react-icons/md';
 
-const SingleMovieBanner = ({ movie, individual, trailer }) => {
+const SingleMovieBanner = ({ movie, individual, trailer,show }) => {
   return (
     <div
       key={movie.id}
@@ -24,7 +24,7 @@ const SingleMovieBanner = ({ movie, individual, trailer }) => {
           {movie.title || movie.original_name}
         </h2>
         <div className='flex justify-center sm:justify-start gap-4 text-gray-400 mb-1'>
-          <p>{movie.runtime} MIN</p>
+          {show ? <p>{movie.number_of_seasons} Temporadas</p> :<p>{movie.runtime} MIN</p>}
           <p>{movie.release_date?.slice(0, 4)}</p>
         </div>
         <p

@@ -8,7 +8,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import SingleMovieBanner from './SingleMovieBanner';
 
-const Banner = ({ popularMovies, individual, movie, trailer }) => {
+const Banner = ({ popularMovies, individual, movie, trailer,show }) => {
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -59,7 +59,7 @@ const Banner = ({ popularMovies, individual, movie, trailer }) => {
     <div className='group'>
       <Slider {...settings}>
         {individual ? (
-          <SingleMovieBanner movie={movie} individual={individual} trailer={trailer}/>
+          <SingleMovieBanner movie={movie} show={show} individual={individual} trailer={trailer}/>
         ) : (
           popularMovies.map((movie) => {
             return (

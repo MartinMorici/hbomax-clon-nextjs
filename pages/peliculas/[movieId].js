@@ -1,19 +1,45 @@
 import Banner from '@/components/Banner';
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import { BiPlay } from 'react-icons/bi';
 import { HiPlus } from 'react-icons/hi';
+import { BsChevronDown } from 'react-icons/bs';
 import { SlArrowRight } from 'react-icons/sl';
 import { SlArrowLeft } from 'react-icons/sl';
 import requests from '@/utils/requests';
 import Link from 'next/link';
 
 const IndividualMovie = (props) => {
+  const [selected, setSelected] = useState(1);
+  const [season, setSeason] = useState();
+
   const similares = props.similares?.slice(0, 10);
   const trailer = props.videos?.filter(
     (vid) => vid.type === 'Trailer' && vid.official === true
   );
+
+  const handleChange = async (e) => {
+    setSelected(e.target.value);
+
+    const episodes = await fetch(
+      `https://api.themoviedb.org/3/tv/${props.movie.id}/season/${e.target.value}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US`
+    );
+    const data = await episodes.json();
+    setSeason(data);
+  };
+
+  const fetchSeason = async () => {
+    const episodes = await fetch(
+      `https://api.themoviedb.org/3/tv/${props.movie.id}/season/${selected}?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US`
+    );
+    const data = await episodes.json();
+    setSeason(data);
+  };
+
+  useEffect(() => {
+    fetchSeason();
+  }, []);
 
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
@@ -75,7 +101,9 @@ const IndividualMovie = (props) => {
     <>
       {props.genero ? (
         <section>
-          <h2 className='px-[28px] sm:px-[36px] md:px-[48px] lg:px-[60px] pt-[100px] text-white text-3xl font-semibold'>{props.titulo}</h2>
+          <h2 className='px-[28px] sm:px-[36px] md:px-[48px] lg:px-[60px] pt-[100px] text-white text-3xl font-semibold'>
+            {props.titulo}
+          </h2>
           <div className='grid place-items-center grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 px-[28px] sm:px-[36px] md:px-[48px] lg:px-[60px] pt-[20px] gap-4'>
             {props.movies.map((movie) => {
               return (
@@ -117,11 +145,61 @@ const IndividualMovie = (props) => {
         </section>
       ) : (
         <>
-          <Banner individual={true} movie={props.movie} trailer={trailer} />
+          <Banner
+            individual={true}
+            movie={props.movie}
+            show={props.tvshow}
+            trailer={trailer}
+          />
           <div className='pl-[28px] sm:pl-[36px] md:pl-[48px] lg:pl-[60px] bg-rowGradient mt-[-6px] mb-[50px] group'>
-            <h2 className='font-bold text-white text-xl mb-3 flex items-center'>
-              Películas recomendadas
-            </h2>
+            {props.tvshow ? (
+              <>
+                <form className='relative w-fit mb-6 mt-[5px]'>
+                  <select
+                    name='temporadas'
+                    id='temporadas'
+                    onChange={handleChange}
+                    value={selected}
+                    className='  font-bold text-white bg-[#ffffff1f] mb py-4 px-3 pr-14 rounded-md appearance-none  text-base outline-none'
+                  >
+                    {props.movie.seasons.map((season, index) => {
+                      return (
+                        <React.Fragment key={season.id}>
+                          {season.name === 'Specials' ? null : (
+                            <option
+                              className='font-bold text-white bg-[#1f1f1f]'
+                              value={season.season_number}
+                              key={index}
+                            >
+                              Temporada {season.season_number}
+                            </option>
+                          )}
+                        </React.Fragment>
+                      );
+                    })}
+                  </select>
+                  <BsChevronDown className='absolute right-3 top-1/2 -translate-y-1/2 text-white text-xl pointer-events-none' />
+                </form>
+                <section className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3 pr-[28px] sm:pr-[36px] md:pr-[48px] lg:pr-[60px]'>
+                  {season?.episodes?.map((episode) => {
+                    return (
+                      <Image
+                        key={episode.id}
+                        width={300}
+                        height={250}
+                        src={requests.imgBase + episode.still_path}
+                        alt={episode.name}
+                      ></Image>
+                    );
+                  })}
+                </section>
+              </>
+            ) : null}
+            {props.tvshow ? null : (
+              <h2 className='font-bold text-white text-xl mb-3 flex items-center'>
+                Películas recomendadas
+              </h2>
+            )}
             <Slider {...settings}>
               {similares?.map((movie) => {
                 return (
@@ -193,12 +271,6 @@ export async function getServerSideProps(context) {
     );
     const data = await res.json();
 
-    const res2 = await fetch(
-      `https://api.themoviedb.org/3/tv/${id}/similar?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US&page=1`
-    );
-    const data2 = await res2.json();
-    const simil = data2.results;
-
     const res3 = await fetch(
       `https://api.themoviedb.org/3/tv/${id}/videos?api_key=${process.env.NEXT_PUBLIC_API_KEY}&language=en-US`
     );
@@ -208,7 +280,6 @@ export async function getServerSideProps(context) {
     return {
       props: {
         movie: data,
-        similares: simil,
         videos: vids,
         tvshow: context.query.show,
       },
