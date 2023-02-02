@@ -9,6 +9,7 @@ import { SlArrowRight } from 'react-icons/sl';
 import { SlArrowLeft } from 'react-icons/sl';
 import requests from '@/utils/requests';
 import Link from 'next/link';
+import Head from 'next/head';
 
 const IndividualMovie = (props) => {
   const [selected, setSelected] = useState(1);
@@ -18,6 +19,8 @@ const IndividualMovie = (props) => {
   const trailer = props.videos?.filter(
     (vid) => vid.type === 'Trailer' && vid.official === true
   );
+
+  console.log(similares);
 
   const handleChange = async (e) => {
     setSelected(e.target.value);
@@ -38,7 +41,9 @@ const IndividualMovie = (props) => {
   };
 
   useEffect(() => {
-    fetchSeason();
+    if (props.tvshow) {
+      fetchSeason();
+    }
   }, []);
 
   function SampleNextArrow(props) {
@@ -99,6 +104,13 @@ const IndividualMovie = (props) => {
 
   return (
     <>
+      <Head>
+        <title>HBO Max</title>
+        <meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
+        <meta name='description' content='Desarrollado por Martín Morici' />
+        <meta name='viewport' content='width=device-width, initial-scale=1' />
+        <link rel='icon' href='/favicon.ico' />
+      </Head>
       {props.genero ? (
         <section>
           <h2 className='px-[28px] sm:px-[36px] md:px-[48px] lg:px-[60px] pt-[100px] text-white text-3xl font-semibold'>
@@ -180,16 +192,27 @@ const IndividualMovie = (props) => {
                   </select>
                   <BsChevronDown className='absolute right-3 top-1/2 -translate-y-1/2 text-white text-xl pointer-events-none' />
                 </form>
-                <section className='grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 lg:grid-cols-6 gap-3 pr-[28px] sm:pr-[36px] md:pr-[48px] lg:pr-[60px]'>
-                  {season?.episodes?.map((episode) => {
+                <section className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-x-4 gap-y-8 pr-[28px] sm:pr-[36px] md:pr-[48px] lg:pr-[60px]'>
+                  {season?.episodes?.map((episode, index) => {
+                    console.log(episode);
                     return (
-                      <Image
+                      <article
                         key={episode.id}
-                        width={300}
-                        height={250}
-                        src={requests.imgBase + episode.still_path}
-                        alt={episode.name}
-                      ></Image>
+                        className='mx-auto flex flex-col'
+                      >
+                        <Image
+                          width={300}
+                          height={250}
+                          src={requests.imgBase + episode.still_path}
+                          alt={episode.name}
+                        ></Image>
+                        <h2 className='font-bold text-gray-300 whitespace-nowrap overflow-hidden text-ellipsis max-w-[300px]'>
+                          {index + '.   ' + episode.name}
+                        </h2>
+                        <h3 className='text-gray-400 text-sm'>
+                          {episode.runtime} MIN
+                        </h3>
+                      </article>
                     );
                   })}
                 </section>
@@ -202,6 +225,12 @@ const IndividualMovie = (props) => {
             )}
             <Slider {...settings}>
               {similares?.map((movie) => {
+                if (
+                  movie.backdrop_path === null ||
+                  movie.poster_path === null
+                ) {
+                  return;
+                }
                 return (
                   <Link
                     href={{

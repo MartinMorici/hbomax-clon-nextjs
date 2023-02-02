@@ -4,12 +4,26 @@ import requests from '@/utils/requests';
 import genres from '@/utils/genres';
 import { SlArrowRight } from 'react-icons/sl';
 import { SlArrowLeft } from 'react-icons/sl';
-import { BiPlay } from 'react-icons/bi';
-import { HiPlus } from 'react-icons/hi';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useContext } from 'react';
+import { AppContext } from '@/context/AppContext';
+import Controls from './Controls';
 
 const Row = (props) => {
+  const {addToList,removeFromList} = useContext(AppContext)
+
+  const handleAddToList = (e,movie) => {
+    e.preventDefault()
+    e.stopPropagation()
+    addToList(movie)
+  }
+  const handleRemoveFromList = (e,movie) => {
+    e.preventDefault()
+    e.stopPropagation()
+    removeFromList(movie)
+  }
+
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
@@ -81,10 +95,10 @@ const Row = (props) => {
   };
 
   return (
-    <div
+    <section
       className={`${
         props.gradient ? 'bg-rowGradient' : ''
-      } mt-[-6px] mb-[50px] group`}
+      } mt-[-6px] mb-[50px] group row`}
     >
       <h2 className='ml-[28px] sm:ml-[36px] md:ml-[48px] lg:ml-[60px] font-bold text-white text-xl mb-3 flex items-center'>
         {props.titulo}
@@ -171,14 +185,7 @@ const Row = (props) => {
                     ) : null}
                     <div className='absolute inset-0 group/btn bg-[rgb(0,0,0,0.2)] hover:bg-[rgb(0,0,0,0.0)] transition-all duration-300'>
                       {props.genero ? null : (
-                        <div className='opacity-0 absolute group-hover/btn:opacity-100 bottom-0 right-0 pr-4 pb-3 flex items-center transition-all duration-300'>
-                          <button className='rounded-full flex justify-center items-center p-[2px] bg-slate-300 hover:bg-white hover:scale-110'>
-                            <BiPlay className='relative left-[2px] w-8 h-8' />
-                          </button>
-                          <button className='ml-2 rounded-full flex justify-center items-center p-2 bg-slate-300 hover:bg-white hover:scale-110'>
-                            <HiPlus className=' w-5 h-5' />
-                          </button>
-                        </div>
+                        <Controls handleAddToList={handleAddToList} handleRemoveFromList={handleRemoveFromList} movie={movie}/>
                       )}
                     </div>
                   </div>
@@ -188,7 +195,7 @@ const Row = (props) => {
           })}
         </Slider>
       </div>
-    </div>
+    </section>
   );
 };
 

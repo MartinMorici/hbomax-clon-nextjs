@@ -33,6 +33,10 @@
   margin-left: 0px !important;
 }
 
+.row .slick-slide{
+  max-width: fit-content;
+}
+
 @media (min-width:640px){
   .slider-container .slick-list{ 
     margin-left: 36px;

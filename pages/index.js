@@ -1,15 +1,26 @@
 import Banner from '@/components/Banner';
 import Row from '@/components/Row';
+import { AppContext } from '@/context/AppContext';
 import requests from '@/utils/requests';
 import Head from 'next/head';
+import { useContext } from 'react';
 
 
 export default function Home({ popularMovies, forYou, bestMovies, popularTV }) {
+  const {myList} = useContext(AppContext)
+
+  let myListLength 
+  if (myList.length > 5) {
+    myListLength = 5
+  } else {
+    myListLength = myList.length
+  }
   
   return (
     <>
       <Head>
         <title>HBO Max</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
         <meta name='description' content='Desarrollado por Martín Morici' />
         <meta name='viewport' content='width=device-width, initial-scale=1' />
         <link rel='icon' href='/favicon.ico' />
@@ -18,7 +29,7 @@ export default function Home({ popularMovies, forYou, bestMovies, popularTV }) {
       <Banner popularMovies={popularMovies.slice(0,6)} />
     
       <Row titulo={'Solo para ti'} movies={forYou} gradient={true} slides={5}/> 
-      {/* Mi lista */}
+      {myList.length >= 1 ? <Row titulo={'Mi lista'} movies={myList} slides={myListLength}/> : null }
       <Row titulo={'Mejor valoradas'} movies={bestMovies} best={true}  slides={5}/> 
       <Row titulo={'Explora por género'} gradient={false} genero={true} slides={8}/> 
       <Row tendencia={true} tvshow={true} movies={popularTV.slice(0,10)} slides={4}/> 
