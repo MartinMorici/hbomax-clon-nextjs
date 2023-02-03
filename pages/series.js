@@ -2,37 +2,17 @@ import Row from '@/components/Row';
 import requests from '@/utils/requests';
 import Head from 'next/head';
 
-const Series = ({ tvPopular, topRated, latest, airingToday, onAir }) => {
+const Series = ({ tvPopular, topRated, airingToday, onAir }) => {
   return (
     <>
       <Head>
         <title>HBO Max</title>
-        <meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
         <meta name='description' content='Desarrollado por Martín Morici' />
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <link rel='icon' href='/favicon.ico' />
       </Head>
       <div className='pl-[28px] sm:pl-[36px] md:pl-[48px] lg:pl-[60px] pt-28'>
-        <Row
-          titulo={'Shows en tendencia'}
-          tvshow={true}
-          movies={tvPopular.slice(0, 10)}
-          slides={5}
-        />
-        <Row
-          titulo={'Mejor valoradas'}
-          best={true}
-          tvshow={true}
-          movies={topRated.slice(0, 10)}
-          slides={5}
-        />
-        {/* <Row titulo={'Mas nuevos'}  tvshow={true} movies={latest} slides={5}/>  */}
-        <Row
-          titulo={'Estrenan hoy'}
-          tvshow={true}
-          movies={airingToday}
-          slides={5}
-        />
+        <Row titulo={'Shows en tendencia'} tvshow={true} movies={tvPopular.slice(0, 10)} slides={5} />
+        <Row titulo={'Mejor valoradas'} best={true} tvshow={true} movies={topRated.slice(0, 10)} slides={5} />
+        <Row titulo={'Estrenan hoy'} tvshow={true} movies={airingToday} slides={5} />
         <Row titulo={'Ya estrenaron'} tvshow={true} movies={onAir} slides={5} />
       </div>
     </>

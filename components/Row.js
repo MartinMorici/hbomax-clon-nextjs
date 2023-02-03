@@ -9,29 +9,26 @@ import Link from 'next/link';
 import { useContext } from 'react';
 import { AppContext } from '@/context/AppContext';
 import Controls from './Controls';
+import { Tendencia } from './Tendencia';
 
 const Row = (props) => {
-  const {addToList,removeFromList} = useContext(AppContext)
+  const { addToList, removeFromList } = useContext(AppContext);
 
-  const handleAddToList = (e,movie) => {
-    e.preventDefault()
-    e.stopPropagation()
-    addToList(movie)
-  }
-  const handleRemoveFromList = (e,movie) => {
-    e.preventDefault()
-    e.stopPropagation()
-    removeFromList(movie)
-  }
+  const handleAddToList = (e, movie) => {
+    e.preventDefault();
+    e.stopPropagation();
+    addToList(movie);
+  };
+  const handleRemoveFromList = (e, movie) => {
+    e.preventDefault();
+    e.stopPropagation();
+    removeFromList(movie);
+  };
 
   function SampleNextArrow(props) {
     const { className, style, onClick } = props;
     return (
-      <div
-        className={`${className} before:content-none right-[22px] z-1`}
-        style={{ ...style, display: 'block' }}
-        onClick={onClick}
-      >
+      <div className={`${className} before:content-none right-[22px] z-1`} style={{ ...style, display: 'block' }} onClick={onClick}>
         <SlArrowRight className='hidden sm:group-hover:block w-5 h-5 text-white' />
       </div>
     );
@@ -40,11 +37,7 @@ const Row = (props) => {
   function SamplePrevArrow(props) {
     const { className, style, onClick } = props;
     return (
-      <div
-        className={`${className} before:content-none left-[22px] z-[11]`}
-        style={{ ...style, display: 'block' }}
-        onClick={onClick}
-      >
+      <div className={`${className} before:content-none left-[22px] z-[11]`} style={{ ...style, display: 'block' }} onClick={onClick}>
         <SlArrowLeft className='hidden sm:group-hover:block  w-5 h-5 text-white' />
       </div>
     );
@@ -52,8 +45,7 @@ const Row = (props) => {
 
   let name = 'center overflow-hidden flex-1';
   if (props.tendencia) {
-    name =
-      'center overflow-hidden tendencia mt-4 custom:ml-[0px] lg:ml-[8%] flex-1';
+    name = 'center overflow-hidden tendencia mt-4 custom:ml-[0px] lg:ml-[8%] flex-1';
   }
 
   const settings = {
@@ -95,49 +87,14 @@ const Row = (props) => {
   };
 
   return (
-    <section
-      className={`${
-        props.gradient ? 'bg-rowGradient' : ''
-      } mt-[-6px] mb-[50px] group row`}
-    >
-      <h2 className='ml-[28px] sm:ml-[36px] md:ml-[48px] lg:ml-[60px] font-bold text-white text-xl mb-3 flex items-center'>
-        {props.titulo}
-      </h2>
-      <div
-        className={`slider-container  ${
-          props.tendencia
-            ? 'custom:bg-[url(../public/bgtendencia.png)] custom:bg-[-55px] bg-contain custom:flex items-center pl-[28px] sm:pl-[36px] md:pl-[48px] lg:pl-[60px]'
-            : ''
-        }`}
-      >
-        {props.tendencia ? (
-          <div className='pr-4 text-center custom:text-left tracking-[-0,05em] custom:tracking-normal'>
-            <h3 className='text-gray-200 font-bold text-xs  custom::text-sm'>
-              NUESTRO TOP 10
-            </h3>
-            <h3 className='text-white font-semibold text-lg custom:text-[33px] custom:mb-3 custom:mt-1 '>
-              En tendencia
-            </h3>
-            <p className='text-white  min-w-[300px] max-w-[300px] custom:max-w-[380px] custom:mx-0 mx-auto text-sm custom:text-base'>
-              Las series más vistas en tu país en los últimos días, ¡no te lo
-              pierdas!
-            </p>
-            <Link href='/series'>
-              <button className='px-[20px] bg-[#3e3b44b3] min-h-[4px] min-w-[144px] py-[10px] rounded-[4px] border-2 border-transparent hover:border-[#663399] hover:border-2 hover:bg-black font-semibold text-white mt-6'>
-                EXPLORA MÁS
-              </button>
-            </Link>
-          </div>
-        ) : null}
+    <section className={`${props.gradient ? 'bg-rowGradient' : ''} mt-[-6px] mb-[50px] group row`}>
+      <h2 className='ml-[28px] sm:ml-[36px] md:ml-[48px] lg:ml-[60px] font-bold text-white text-xl mb-3 flex items-center'>{props.titulo}</h2>
+      <div className={`slider-container  ${props.tendencia ? 'custom:bg-[url(../public/bgtendencia.png)] custom:bg-[-55px] bg-contain custom:flex items-center pl-[28px] sm:pl-[36px] md:pl-[48px] lg:pl-[60px]' : ''}`}>
+        {props.tendencia ? <Tendencia /> : null}
         <Slider {...settings}>
-          {(props.genero
-            ? genres
-            : props.similar
-            ? props.similar
-            : props.movies
-          ).map((movie, index) => {
+          {(props.genero ? genres : props.similar ? props.similar : props.movies).map((movie, index) => {
             if (movie.poster_path === null || movie.backdrop_path === null) {
-              return null
+              return null;
             }
             return (
               <Link
@@ -151,43 +108,16 @@ const Row = (props) => {
                 }}
                 key={movie.id}
               >
-                <div
-                  className={`pr-5 w-full ${props.tendencia ? 'custom' : ''}`}
-                >
-                  <div
-                    className={`relative focus-visible:outline-none outline-[rgb(0,0,0,0)] outline outline-2 outline-offset-[-2px] transition-all duration-300 hover:outline-[#663399]`}
-                  >
-                    <Image
-                      width={props.genero ? 250 : 360}
-                      height={200}
-                      src={
-                        props.genero
-                          ? movie.img.src
-                          : props.best || props.tendencia
-                          ? requests.imgBase + movie.poster_path
-                          : requests.imgBase + movie.backdrop_path
-                      }
-                      alt={
-                        props.genero
-                          ? movie.alt
-                          : movie.title || movie.name || movie.original_name
-                      }
-                    />
+                <div className={`pr-5 w-full ${props.tendencia ? 'custom' : ''}`}>
+                  <div className={`relative focus-visible:outline-none outline-[rgb(0,0,0,0)] outline outline-2 outline-offset-[-2px] transition-all duration-300 hover:outline-[#663399]`}>
+                    <Image width={props.genero ? 250 : 360} height={200} src={props.genero ? movie.img.src : props.best || props.tendencia ? requests.imgBase + movie.poster_path : requests.imgBase + movie.backdrop_path} alt={props.genero ? movie.alt : movie.title || movie.name || movie.original_name} />
                     {props.tendencia ? (
                       <div className='absolute z-10 top-0 left-0 w-10 h-6 bg-white rounded-sm text-center flex justify-center items-center'>
-                        <span className='text-[12px] font-extrabold pt-[2px]'>
-                          #
-                        </span>
-                        <span className='text-[14px] font-bold'>
-                          {index + 1}
-                        </span>
+                        <span className='text-[12px] font-extrabold pt-[2px]'>#</span>
+                        <span className='text-[14px] font-bold'>{index + 1}</span>
                       </div>
                     ) : null}
-                    <div className='absolute inset-0 group/btn bg-[rgb(0,0,0,0.2)] hover:bg-[rgb(0,0,0,0.0)] transition-all duration-300'>
-                      {props.genero ? null : (
-                        <Controls handleAddToList={handleAddToList} handleRemoveFromList={handleRemoveFromList} movie={movie}/>
-                      )}
-                    </div>
+                    <div className='absolute inset-0 group/btn bg-[rgb(0,0,0,0.2)] hover:bg-[rgb(0,0,0,0.0)] transition-all duration-300'>{props.genero ? null : <Controls handleAddToList={handleAddToList} handleRemoveFromList={handleRemoveFromList} movie={movie} />}</div>
                   </div>
                 </div>
               </Link>

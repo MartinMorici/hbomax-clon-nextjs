@@ -20,10 +20,7 @@ export default function Home({ popularMovies, forYou, bestMovies, popularTV }) {
     <>
       <Head>
         <title>HBO Max</title>
-        <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
         <meta name='description' content='Desarrollado por Martín Morici' />
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <link rel='icon' href='/favicon.ico' />
       </Head>
       
       <Banner popularMovies={popularMovies.slice(0,6)} />

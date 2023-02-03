@@ -7,19 +7,11 @@ const Peliculas = ({ popularMovies, forYou, bestMovies, upcomingMovies }) => {
     <>
       <Head>
         <title>HBO Max</title>
-        <meta http-equiv='Content-Type' content='text/html;charset=UTF-8' />
         <meta name='description' content='Desarrollado por Martín Morici' />
-        <meta name='viewport' content='width=device-width, initial-scale=1' />
-        <link rel='icon' href='/favicon.ico' />
       </Head>
       <div className='pl-[28px] sm:pl-[36px] md:pl-[48px] lg:pl-[60px] pt-28'>
         <Row titulo={'Películas populares'} movies={popularMovies} slides={5} />
-        <Row
-          titulo={'Mejor valoradas'}
-          best={true}
-          movies={bestMovies}
-          slides={5}
-        />
+        <Row titulo={'Mejor valoradas'} best={true} movies={bestMovies} slides={5} />
         <Row titulo={'En camino'} movies={upcomingMovies} slides={5} />
         <Row titulo={'Solo para ti'} movies={forYou} slides={5} />
       </div>
