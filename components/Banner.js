@@ -65,11 +65,11 @@ const Banner = ({ popularMovies, individual, movie, trailer, show }) => {
                   <h2 className='text-center sm:text-left font-bold text-xl sm:text-3xl md:text-4xl lg:text-6xl xl:text-7xl sm:w-[30ch] mb-3'>{movie.title}</h2>
                   <p className=' parrafo text-center sm:text-left max-w-[800px] sm:pr-4 sm:mb-6 text-ellipsis overflow-hidden md:text-lg sm:whitespace-nowrap '>{movie.overview}</p>
                   <div className=' gap-5 items-center hidden sm:flex'>
-                    <button className='border-2 border-white rounded-full flex justify-center items-center p-2 hover:border-[#663399] hover:bg-black'>
+                    <button aria-label='Play' className='border-2 border-white rounded-full flex justify-center items-center p-2 hover:border-[#663399] hover:bg-black'>
                       <BiPlay className='w-9 h-9' />
                     </button>
                     <Link href={`peliculas/${movie.id}`}>
-                      <button className='px-[20px] bg-[#3e3b44b3] min-h-[4px] min-w-[144px] py-[12px] rounded-[4px] hover:border-[#663399] hover:border-2 hover:bg-black font-semibold'>MÁS INFO</button>
+                      <button aria-label='Mas Información' className='px-[20px] bg-[#3e3b44b3] min-h-[4px] min-w-[144px] py-[12px] rounded-[4px] hover:border-[#663399] hover:border-2 hover:bg-black font-semibold'>MÁS INFO</button>
                     </Link>
                   </div>
                 </div>

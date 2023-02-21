@@ -89,7 +89,7 @@ const Row = (props) => {
   return (
     <section className={`${props.gradient ? 'bg-rowGradient' : ''} mt-[-6px] mb-[50px] group row`}>
       <h2 className='ml-[28px] sm:ml-[36px] md:ml-[48px] lg:ml-[60px] font-bold text-white text-xl mb-3 flex items-center'>{props.titulo}</h2>
-      <div className={`slider-container  ${props.tendencia ? 'custom:bg-[url(../public/bgtendencia.png)] custom:bg-[-55px] bg-contain custom:flex items-center pl-[28px] sm:pl-[36px] md:pl-[48px] lg:pl-[60px]' : ''}`}>
+      <div className={`slider-container  ${props.tendencia ? 'custom:bg-[url(../public/bgtendencia.webp)] custom:bg-[-55px] bg-contain custom:flex items-center pl-[28px] sm:pl-[36px] md:pl-[48px] lg:pl-[60px]' : ''}`}>
         {props.tendencia ? <Tendencia /> : null}
         <Slider {...settings}>
           {(props.genero ? genres : props.similar ? props.similar : props.movies).map((movie, index) => {

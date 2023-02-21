@@ -48,10 +48,10 @@ const Search = () => {
                     <Image width={360} height={200} src={requests.imgBase + movie.backdrop_path} alt={movie.title || movie.original_name} />
                     <div className='absolute inset-0 group/btn bg-[rgb(0,0,0,0.2)] hover:bg-[rgb(0,0,0,0.0)] transition-all duration-300'>
                       <div className='opacity-0 absolute group-hover/btn:opacity-100 bottom-0 right-0 pr-4 pb-3 flex items-center transition-all duration-300'>
-                        <button className='rounded-full flex justify-center items-center p-[2px] bg-slate-300 hover:bg-white hover:scale-110'>
+                        <button aria-label='Play' className='rounded-full flex justify-center items-center p-[2px] bg-slate-300 hover:bg-white hover:scale-110'>
                           <BiPlay className='relative left-[2px] w-8 h-8' />
                         </button>
-                        <button className='ml-2 rounded-full flex justify-center items-center p-2 bg-slate-300 hover:bg-white hover:scale-110'>
+                        <button aria-label='Agregar a mi lista' className='ml-2 rounded-full flex justify-center items-center p-2 bg-slate-300 hover:bg-white hover:scale-110'>
                           <HiPlus className=' w-5 h-5' />
                         </button>
                       </div>
